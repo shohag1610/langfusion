@@ -1,0 +1,64 @@
+# -------------------------
+# Python
+# -------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.pickle
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+
+# Local settings
+*.env
+*.toml
+*.yaml
+*.yml
+
+# Dataset storage
+data/
+datasets/
+*.csv
+*.tsv
+*.jsonl
+*.parquet
+
+# Checkpoints and training logs
+checkpoints/
+logs/
+runs/
+tensorboard/
+
+# HuggingFace cache
+huggingface/
+hf_cache/
+~/.cache/huggingface/
+
+
+# Indexes
+index/
+faiss_index/
+*.faiss
+
+
+# -------------------------
+# Build / Packaging
+# -------------------------
+dist/
+build/
+*.egg-info/
+
+# -------------------------
+# OS & Editor Files
+# -------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
