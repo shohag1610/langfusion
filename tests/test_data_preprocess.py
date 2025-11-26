@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
-from src.data_preprocess import preprocess  # adjust import path
+from src.preprocess_dataset import preprocess  # adjust import path
 
 
 def test_preprocess_creates_text_column():
