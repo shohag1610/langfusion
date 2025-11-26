@@ -8,6 +8,7 @@ from src.preprocessing.text_preprocessor import TextPreprocessor
 from src.model.trainer import ModelTrainer
 from src.model.evaluator import ModelEvaluator
 from src.model.mode_io import ModelIO
+from classifier.news_classifier import NewsClassifier
 
 
 
@@ -45,10 +46,6 @@ def main():
     # Save model
     model_io = ModelIO()
     model_io.save(model, processor.vectorizer)
-    
-    # load model
-    model_io = ModelIO()
-    model_io.save(model, processor.vectorizer)
-    
+
 if __name__ == "__main__":
     main()
