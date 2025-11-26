@@ -10,4 +10,5 @@ class ModelTrainer:
     def train(self, X_train, y_train):
         logger.info("Training Logistic Regression model...")
         self.model.fit(X_train, y_train)
+        logger.info("Logistic Regression model successfully trained...")
         return self.model

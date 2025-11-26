@@ -5,6 +5,8 @@ from sklearn.model_selection import train_test_split
 from src.ingest.dataset_ingestor import DatasetIngestor
 from src.data.dataset_loader import DatasetLoader
 from src.preprocessing.text_preprocessor import TextPreprocessor
+from src.model.trainer import ModelTrainer
+from src.model.evaluator import ModelEvaluator
 
 
 
@@ -34,6 +36,10 @@ def main():
     # Train
     trainer = ModelTrainer()
     model = trainer.train(X_train, y_train)
+    
+    # Evaluate
+    evaluator = ModelEvaluator()
+    evaluator.evaluate(model, X_test, y_test)
     
 if __name__ == "__main__":
     main()
