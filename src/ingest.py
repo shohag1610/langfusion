@@ -39,16 +39,20 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     
     return df
 
-def save_data(df: pd.DataFrame, filename: str = "cleaned_dataset.csv"):
+def save_data(df: pd.DataFrame, filename: str):
     output_path = OUTPUT_DIR / filename
     df.to_csv(output_path, index=False)
     
-    logging.info(f"Saved cleaned dataset → {output_path}")
+    logging.info(f"Dataset saved → {output_path}")
 
 def ingest():
+    #get and save dataset from url
     raw_df = load_raw_data() 
+    save_data(raw_df, "raw_dataset.csv")
+    
+    #clean data and save
     clean_df = clean_data(raw_df)
-    save_data(clean_df)
+    save_data(clean_df, "cleaned_dataset.csv")
     
     logging.info("Ingestion pipeline completed successfully.")
 
