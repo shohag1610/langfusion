@@ -12,11 +12,11 @@ class TextPreprocessor:
         logger.info("Combining title and description fields...")
         df["text"] = df["title"].fillna("") + " " + df["description"].fillna("")
 
-        logger.info("Vectorising text using TF-IDF...")
+        logger.info("Vectorising text using TF-IDF and splitting...")
         
         X = self.vectorizer.fit_transform(df["text"])
         y = df["label"]
         
-        logger.info("Vectorised successfully.")
+        logger.info("Vectorised and splitted successfully.")
         
         return X, y
