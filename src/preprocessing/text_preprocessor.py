@@ -13,6 +13,10 @@ class TextPreprocessor:
         df["text"] = df["title"].fillna("") + " " + df["description"].fillna("")
 
         logger.info("Vectorising text using TF-IDF...")
+        
         X = self.vectorizer.fit_transform(df["text"])
         y = df["label"]
+        
+        logger.info("Vectorised successfully.")
+        
         return X, y
