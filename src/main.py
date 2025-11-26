@@ -7,6 +7,7 @@ from src.data.dataset_loader import DatasetLoader
 from src.preprocessing.text_preprocessor import TextPreprocessor
 from src.model.trainer import ModelTrainer
 from src.model.evaluator import ModelEvaluator
+from src.model.persistence import ModelPersistence
 
 
 
@@ -40,6 +41,10 @@ def main():
     # Evaluate
     evaluator = ModelEvaluator()
     evaluator.evaluate(model, X_test, y_test)
+    
+    # Save
+    saver = ModelPersistence()
+    saver.save(model, processor.vectorizer)
     
 if __name__ == "__main__":
     main()
