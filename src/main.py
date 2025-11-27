@@ -8,7 +8,7 @@ from data.text_preprocessor import TextPreprocessor
 from src.model.trainer import ModelTrainer
 from src.model.evaluator import ModelEvaluator
 from src.model.mode_io import ModelIO
-from src.model.interactive_cli_interface import cli_interface
+from interfaces.ag_news_cli_interface import ag_news_cli_interface
 
 
 
@@ -49,5 +49,5 @@ def main():
     
 
 if __name__ == "__main__":
-    cli_interface()
+    ag_news_cli_interface()
     # main()

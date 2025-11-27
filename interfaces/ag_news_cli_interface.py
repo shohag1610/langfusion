@@ -5,7 +5,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def cli_interface():
+def ag_news_cli_interface():
     classifier = NewsClassifier("models/trained_model.pkl")
 
     print("\nAG News Classifier")

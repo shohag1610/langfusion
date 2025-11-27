@@ -21,12 +21,18 @@ Usage: Dataset is downloaded locally, preprocessed, and used to train the classi
 ```bash
 langfusion/
 │
+├── classifier/			        # trained models
+│   └── news_classifier.py  
+│  
 ├── data/			        # datasets
 │   ├── cleaned_dataset.csv
 │   └── raw_dataset.csv
 │  
 ├── models/			        # trained models
 │   └── trained_model.pkl  
+│
+├── interfaces/			        # trained models
+│   └── ag_news_chat_cli.py  
 │
 ├── src/
 │   ├── classifier/     	# news classifier
@@ -65,7 +71,7 @@ This downloads the dataset, trains the model, and saves it locally.
 
 4. Run the Interactive CLI (from project root):
 ```bash
-python src/model/interactive_cli_interface.py
+python interfaces/interactive_cli_interface.py
 ```
 ## 💬 Interacting with the Model (CLI)
 You will see a prompt asking for a news title and description:
