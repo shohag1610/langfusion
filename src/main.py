@@ -2,9 +2,9 @@ import logging
 from sklearn.model_selection import train_test_split
 
 
-from src.ingest.dataset_ingestor import DatasetIngestor
+from data.dataset_ingestor import DatasetIngestor
 from src.data.dataset_loader import DatasetLoader
-from src.preprocessing.text_preprocessor import TextPreprocessor
+from data.text_preprocessor import TextPreprocessor
 from src.model.trainer import ModelTrainer
 from src.model.evaluator import ModelEvaluator
 from src.model.mode_io import ModelIO

@@ -21,23 +21,21 @@ Usage: Dataset is downloaded locally, preprocessed, and used to train the classi
 ```bash
 langfusion/
 │
-├── data/			# datasets
+├── data/			        # datasets
 │   ├── cleaned_dataset.csv
 │   └── raw_dataset.csv
 │  
-├── models/			# trained models
+├── models/			        # trained models
 │   └── trained_model.pkl  
 │
 ├── src/
 │   ├── classifier/     	# news classifier
-│   ├── data/           	# load cleaned dataset from local
-│   ├── ingest/         	# data ingestion + cleaning pipeline
+│   ├── data/           	# ingest pipeline, preprocessor, data loader
 │   ├── model/          	# model training, evaluation, saving and loading, interaction-cli
-│   ├── preprocessing/ 		# preprocess data (feature engineer and vectoris)
 │   └──  main.py 
 │
 ├── tests/			
-│   ├── test_dataset_ingestor.py
+│   └── test_dataset_ingestor.py
 │
 ├── requirements.txt		
 ├── README.md
@@ -78,8 +76,8 @@ Enter news description: Workers at Sri Lanka's main oil company end a two-day st
 [Result] Business
 
 ### After this, continue with:
-Enter news title: [Enter news title]
-Enter news description: [Enter description]
+Enter news title: [Enter news title]    
+Enter news description: [Enter description]     
 
 ### The model will respond with the predicted news category:
 [Result] [What type of news is this]

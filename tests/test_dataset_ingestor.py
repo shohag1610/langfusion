@@ -1,7 +1,7 @@
 # tests/test_ingest.py
 import pandas as pd
 from pathlib import Path
-from src.ingest.dataset_ingestor import DatasetIngestor
+from data.dataset_ingestor import DatasetIngestor
 
 def test_load_raw_data():
     df = DatasetIngestor.load_raw_data("sh0416/ag_news")
