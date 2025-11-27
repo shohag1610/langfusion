@@ -1,29 +1,90 @@
-# Natural Language Classifier - AG News
+# 📰 Natural Language Classifier — AG News
+This project implements an end-to-end machine learning pipeline for classifying news headlines using the AG News dataset.
+It combines traditional ML techniques with a structured workflow suitable for production-ready environments.
 
-This project builds a machine learning pipeline for classifying news headlines using the AG News dataset.
-It combines a classifier with a language model, structured for professional, production-ready use.
+## 📚 Dataset Overview
 
-## Dataset
-- **Dataset Name:** AG News Classification Dataset
-- **Source:** [HuggingFace](https://huggingface.co/datasets/sh0416/ag_news)
-- **Description:** News headlines labeled into four categories: World, Sports, Business, Sci/Tech.
-- **Size:** 120,000 training samples, 7,600 test samples
-- **Usage:** Dataset downloaded and ingested locally for preprocessing and training
+Name: AG News Classification Dataset
+Source: HuggingFace
+Description: Each sample contains a news title and description, categorized into one of four classes:
 
-## How to Run
+World   
+Sports  
+Business    
+Sci/Tech    
+
+Size:
+Total: 120,000 samples  
+Usage: Dataset is downloaded locally, preprocessed, and used to train the classifier.
+
+## Project Structure
+```bash
+langfusion/
+│
+├── data/			# datasets
+│   ├── cleaned_dataset.csv
+│   └── raw_dataset.csv
+│  
+├── models/			# trained models
+│   └── trained_model.pkl  
+│
+├── src/
+│   ├── classifier/     	# news classifier
+│   ├── data/           	# load cleaned dataset from local
+│   ├── ingest/         	# data ingestion + cleaning pipeline
+│   ├── model/          	# model training, evaluation, saving and loading, interaction-cli
+│   ├── preprocessing/ 		# preprocess data (feature engineer and vectoris)
+│   └──  main.py 
+│
+├── tests/			
+│   ├── test_dataset_ingestor.py
+│
+├── requirements.txt		
+├── README.md
+├── .gitignore
+└── venv/   
+```
+
+## ⚙️ How to Run the Project
 
 1. Create virtual environment:
 ```bash
 python -m venv venv
-source venv/bin/activate  # Linux/macOS
-venv\Scripts\activate     # Windows
-export PYTHONPATH=$(pwd)  # Export Current Working Directory
+source venv/bin/activate   # Linux/macOS
+venv\Scripts\activate      # Windows
+
+export PYTHONPATH=$(pwd)   # Set project root
 ```
 2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-2. Install dependencies: (make sure you are in root directory)
+3. Train the Model (from project root):
 ```bash
-python src/ingest.py
+python src/main.py
+```
+This downloads the dataset, trains the model, and saves it locally.
+
+4. Run the Interactive CLI (from project root):
+```bash
+python src/model/interactive_cli_interface.py
+```
+## 💬 Interacting with the Model (CLI)
+You will see a prompt asking for a news title and description:
+
+Enter news title: Sri Lanka hit by oil strike
+Enter news description: Workers at Sri Lanka's main oil company end a two-day strike, held in protest at government plans to sell more of the company.
+
+[Result] Business
+
+### After this, continue with:
+Enter news title: [Enter news title]
+Enter news description: [Enter description]
+
+### The model will respond with the predicted news category:
+[Result] [What type of news is this]
+
+To exit the interface, type:
+```bash
+exit
 ```
