@@ -29,4 +29,4 @@ def ag_news_cli_interface():
 
 
 if __name__ == "__main__":
-    cli_interface()
+    ag_news_cli_interface()
