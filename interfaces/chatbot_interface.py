@@ -6,6 +6,7 @@ import re
 from transformers import pipeline
 from classifier.news_classifier import NewsClassifier
 from utils.clean_text import clean_text
+from utils.extract_ag_new_json import extract_ag_news_json
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -19,15 +20,34 @@ class ChatbotInterface:
     ):
         self.classifier = NewsClassifier(model_path)
         
-        self._extractor_pipeline = pipeline("text2text-generation", model=llm_model_name)
-        self.extractor_fn = self._llm_extractor
+        self.extractor_pipeline = pipeline("text2text-generation", model=llm_model_name)
         
-    def _llm_extractor(self, user_input: str) -> Dict[str, str]:
+    def llm_extractor(self, user_input: str) -> Dict[str, str]:
         cleaned_user_input = clean_text(user_input)
-        return cleaned_user_input
+        prompt = (
+            "Extract a news title and a short description from the user's input. "
+            "Return a JSON object with keys: title, description. Return NOTHING else.\n\n"
+            f"User input:\n{cleaned_user_input}\n\nJSON: "
+        )
+        
+        logger.debug("Calling LLM extractor pipeline.")
+        
+        out = self.extractor_pipeline(prompt, max_length=256, do_sample=False)[0]["generated_text"]
+        
+        return extract_ag_news_json(out)
+    
+    def extract_and_classify(self, user_input: str) -> Dict[str, str]:
+    
+        extracted = self.llm_extractor(user_input)
+        title = extracted.get("title", "")
+        description = extracted.get("description", "")
+
+        # call classifier
+        label = self.classifier.classify(title, description)
+        return {"title": title, "description": description, "label": label}
 
 if __name__ == "__main__":
     bot = ChatbotInterface()
 
-    result = bot._llm_extractor("FCC mobile spam rule doesn't cover some SMS (MacCentral). MacCentral - A rule prohibiting mobile-phone spam adopted by the U.S. Federal Communications Commission (FCC) earlier this month doesn't prohibit phone-to-phone text messaging, but FCC officials believe the new rule, combined with a 13-year-old law, should protect U.S. mobile phone customers against unsolicited commercial e-mail.")
+    result = bot.extract_and_classify("Heiress Nicky Hilton Marries in Vegas, LAS VEGAS - Nicky Hilton, the hotel heiress and socialite, has tied the knot with her beau in a late-night ceremony, according to court filings obtained by The Associated Press.    Hilton, 20, married New York money manager Todd Andrew Meister, 33, at the Las Vegas Wedding Chapel early Sunday, according a Clark County marriage license...")
     print(result)
