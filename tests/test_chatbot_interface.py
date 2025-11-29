@@ -58,3 +58,29 @@ def test_extract_and_classify():
         "Tesla unveils CyberHauler",
         "The vehicle promises 500 miles range and autonomous driving features."
     )
+
+def test_llm_responder():
+    bot = ChatbotInterface()
+
+    # Mock extract_and_classify output
+    bot.extract_and_classify = MagicMock(return_value={
+        "title": "Tesla launches new battery",
+        "description": "The new model offers longer range and faster charging.",
+        "label": "Business"
+    })
+
+    # Mock pipeline response
+    bot.responder_pipeline = MagicMock(return_value=[
+        {"generated_text": "This article is related to Business news."}
+    ])
+
+    user_input = "Some input about Tesla"
+    result = bot.llm_responder(user_input)
+
+    expected_output = "This article is related to Business news."
+    assert result == expected_output
+
+    # Ensure extract_and_classify was called once
+    bot.extract_and_classify.assert_called_once_with(user_input)
+
+    bot.responder_pipeline.assert_called_once()

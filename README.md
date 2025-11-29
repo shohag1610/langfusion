@@ -32,6 +32,7 @@ langfusion/
 │   └── trained_model.pkl  
 │
 ├── interfaces/			        # trained models
+│   ├── chatbot_interface.py
 │   └── ag_news_chat_cli.py  
 │
 ├── src/
