@@ -49,5 +49,4 @@ def main():
     
 
 if __name__ == "__main__":
-    ag_news_cli_interface()
-    # main()
+    main()
